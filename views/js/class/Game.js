@@ -4,9 +4,18 @@ var Game = function(canvas, socket)
 	var context = canvas.getContext("2d");
 	var socketManager = new SocketManager(socket, self);
 	var mouseX;
-	this.color = "defaultColor";
+	this.color = "black";
 	this.pawns = [];
+	this.text = "";
 
+	var drawText = function(text)
+	{
+		context.font = "50px Comic Sans MS";
+		context.fillStyle = "gold";
+		context.beginPath();
+		context.fillText(text, 10, 50);
+		context.fill();
+	}
 	var drawGrid = function()
 	{
 		var color = "white";
@@ -33,6 +42,13 @@ var Game = function(canvas, socket)
 		context.beginPath();
 		context.arc(x, y, 40, 0, Math.PI*2);
 		context.fill();
+		context.fillStyle = "rgba(255, 255, 255, 0.2)";
+		context.strokeStyle = "black";
+		context.beginPath();
+		context.arc(x, y, 25, 0, Math.PI*2);
+		context.fill();
+		if(color !== "white")
+			context.stroke();
 	}
 	var drawMousePawn = function(event)
 	{
@@ -48,6 +64,7 @@ var Game = function(canvas, socket)
 		context.clearRect(0, 0, canvas.width, canvas.height);
 		drawGrid();
 		drawPawn(mouseX, 50, self.color);
+		drawText(self.text);
 		window.requestAnimationFrame(self.render);
 	}
 	canvas.addEventListener("mousemove", drawMousePawn);

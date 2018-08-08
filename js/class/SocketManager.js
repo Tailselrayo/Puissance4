@@ -16,7 +16,7 @@ var SocketManager = function(server, game)
 		socket.on("game:sendPos", function(datas)
 		{
 			game.addPawn(socket, Math.floor(datas.x));
-		})
+		});
 	});
 
 	var onDisconnect = function(socket)

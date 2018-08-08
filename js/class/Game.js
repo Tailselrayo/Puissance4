@@ -4,18 +4,24 @@ var Game = function()
 	let winPawnPos = {x:-1, y:-1};
 	let currentPlayer = 0;
 	let players = [];
-	let datas = new Array(7);
+	let datas;
 	let hasWon = false;
 
-	for(let i = 0; i < 7; i++)
+	let reset = function(x=7, y=6)
 	{
-		datas[i] = new Array(6);
-		for(let j = 0; j < 6; j++)
+		datas = new Array(x);
+		hasWon = false;
+		for(let i = 0; i < x; i++)
 		{
-			datas[i][j] = 0;
+			datas[i] = new Array(y);
+			for(let j = 0; j < y; j++)
+			{
+				datas[i][j] = 0;
+			}
 		}
-	}
+		broadcast("game:sendUpdate", {pawns:datas});
 
+	}
 	let broadcast = function(event, content)
 	{
 		for(var j = 0; j < players.length; j++)
@@ -134,6 +140,7 @@ var Game = function()
 				y:winPawnPos.y
 			});
 			hasWon = true;
+			setTimeout(reset, 5000);
 			return;
 		}
 		currentPlayer++;
@@ -146,5 +153,6 @@ var Game = function()
 
 		players.splice(index, 1);
 	}
+	reset();
 }
 module.exports = Game;

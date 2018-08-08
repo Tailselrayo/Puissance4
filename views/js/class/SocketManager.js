@@ -8,6 +8,7 @@ var SocketManager = function(socket, game)
 	var getUpdate = function(datas)
 	{
 		game.pawns = datas.pawns;
+		game.text = "       ";
 	}
 	var manageEnd = function(datas)
 	{

@@ -4,8 +4,6 @@ function main()
 	var socket = io();
 	var game = new Game(canvas, socket);
 
-	canvas.width = 700;
-	canvas.height = 700;
 	game.render();
 }
 

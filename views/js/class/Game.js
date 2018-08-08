@@ -61,6 +61,13 @@ var Game = function(canvas, socket)
 	}
 	this.render = function()
 	{
+		if(self.pawns != undefined)
+		{
+			canvas.width = self.pawns.length*100;
+			if(self.pawns[0] != undefined)
+				canvas.height = self.pawns[0].length*100+100;
+		}
+		console.log(canvas.width + " " + canvas.height);
 		context.clearRect(0, 0, canvas.width, canvas.height);
 		drawGrid();
 		drawPawn(mouseX, 50, self.color);

@@ -1,0 +1,23 @@
+{
+  "name": "powerfour",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AlexandreVolts/powerfour.git"
+  },
+  "author": "AlexandreVolts & Tailselrayo",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AlexandreVolts/powerfour/issues"
+  },
+  "homepage": "https://github.com/AlexandreVolts/powerfour#readme",
+  "dependencies": {
+    "express": "^4.16.3",
+    "socket.io": "^2.1.1"
+  }
+}

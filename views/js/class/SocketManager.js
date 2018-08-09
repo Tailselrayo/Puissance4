@@ -9,6 +9,9 @@ var SocketManager = function(socket, game)
 	{
 		game.pawns = datas.pawns;
 		game.text = "       ";
+		game.posPawn.x = datas.newX;
+		game.posPawn.y = datas.newY;
+		game.clock.restart();
 	}
 	var manageEnd = function(datas)
 	{

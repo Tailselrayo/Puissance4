@@ -1,6 +1,7 @@
 const COLOR = ["red","green"];
 var Game = function()
 {
+	let tileNumber;
 	let winPawnPos = {x:-1, y:-1};
 	let currentPlayer = 0;
 	let players = [];
@@ -9,6 +10,7 @@ var Game = function()
 
 	let reset = function(x=7, y=6)
 	{
+		tileNumber = x*y;
 		datas = new Array(x);
 		hasWon = false;
 		for(let i = 0; i < x; i++)
@@ -56,7 +58,7 @@ var Game = function()
 	let checkLeftDiagonal = function(x, y)
 	{
 		let selected = datas[x][y];
-		if(x-4 < 0 || y+4 > datas[x].length)
+		if(x-3 < 0 || y+4 > datas[x].length)
 			return (false);
 		for(let i = x; i > x-4; i--)
 		{
@@ -130,7 +132,12 @@ var Game = function()
 			datas[x][i-1] = 1;
 		else if(color === COLOR[1])
 			datas[x][i-1] = 2;
-		broadcast("game:sendUpdate", {pawns:datas});
+		broadcast("game:sendUpdate", 
+		{
+			pawns:datas,
+			newX:x,
+			newY:i-1
+		});
 		if(checkVictory() == true)
 		{
 			broadcast("game:end", 
@@ -143,6 +150,9 @@ var Game = function()
 			setTimeout(reset, 5000);
 			return;
 		}
+		tileNumber--;
+		if(tileNumber == 0)
+			setTimeout(reset, 5000);
 		currentPlayer++;
 		if(currentPlayer > 1)
 			currentPlayer = 0;
